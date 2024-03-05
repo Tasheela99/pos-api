@@ -1,0 +1,31 @@
+package com.pos.posapi.dto;
+
+import com.pos.posapi.enity.Cart;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
+import java.util.Date;
+@Data
+@AllArgsConstructor
+@RequiredArgsConstructor
+public class ItemDto {
+    private int itemId;
+    private String itemName;
+    private int itemQuantity;
+    private double itemUnitPrice;
+    private boolean activeState;
+
+    private CategoryDto category;
+    private StockDto stock;
+    private CartDto cart;
+
+    public ItemDto(String itemName, int itemQuantity, double itemUnitPrice,boolean activeState, CategoryDto category, StockDto stock) {
+        this.itemName = itemName;
+        this.itemQuantity = itemQuantity;
+        this.itemUnitPrice = itemUnitPrice;
+        this.activeState = activeState;
+        this.category = category;
+        this.stock = stock;
+    }
+}
