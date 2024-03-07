@@ -34,13 +34,27 @@ public class StockController {
     public ResponseEntity<StandardResponse> getStockById(
             @RequestParam(value = "id") int id
     ) {
-        StockDto stockDto = stockService.getStockId(id);
+        StockDto stockDto = stockService.getStockById(id);
         return new ResponseEntity<>(
                 new StandardResponse(
                         200,
                         "ALl Stock of Id " + id,
                         stockDto
                 ), HttpStatus.OK
+        );
+    }
+
+    @DeleteMapping(params={"id"})
+    public ResponseEntity<StandardResponse> deleteStock(
+        @RequestParam(value="id") int id
+    ){
+        CommonResponseDTO commonResponseDto = stockService.deleteStock(id);
+        return new ResponseEntity<>(
+                new StandardResponse(
+                        commonResponseDto.getCode(),
+                        commonResponseDto.getMessage(),
+                        commonResponseDto.getData()
+                ),HttpStatus.NO_CONTENT
         );
     }
 }

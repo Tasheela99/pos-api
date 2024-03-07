@@ -88,7 +88,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public CommonResponseDTO createUser(RequestUserSaveDto userDTO) {
         UserRole userRole = userRoleRepo.findUserRoleByRoleName("CUSTOMER");
-        User userByUsername = userRepo.findByUsername(userDTO.getEmail());
         int otp = generator.generateOtp();
         String prefix = generator.generatePrefix();
         UserDTO newUserDTO = new UserDTO(
@@ -108,24 +107,7 @@ public class UserServiceImpl implements UserService {
                 userRoleMapper.toUserRoleDto(userRole)
 
         );
-
-        if (userByUsername == null) {
-            if (userRole != null) {
-                if (!userRepo.existsById(String.valueOf(newUserDTO.getUserId()))) {
-                    userRepo.save(userMapper.toUser(newUserDTO));
-                } else {
-                    return new CommonResponseDTO(
-                            409, "USER_ALREADY_EXISTS", userDTO.getEmail(), new ArrayList<>()
-                    );
-                }
-            } else {
-                return new CommonResponseDTO(
-                        404, "USER_ROLE_NOT_FOUND", userDTO.getEmail(), new ArrayList<>()
-                );
-            }
-        } else {
-            throw new IllegalStateException("Something went wrong!");
-        }
+        userRepo.save(userMapper.toUser(newUserDTO));
 
         return new CommonResponseDTO(
                 201, "USER_REGISTRATION_SUCCESSFULLY", userDTO.getEmail(), new ArrayList<>()

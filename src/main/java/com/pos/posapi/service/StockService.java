@@ -7,5 +7,7 @@ import com.pos.posapi.dto.responsedto.core.CommonResponseDTO;
 public interface StockService {
     CommonResponseDTO createStock(RequestStockDto stockDto);
 
-    StockDto getStockId(int id);
+    StockDto getStockById(int id);
+
+    CommonResponseDTO deleteStock(int id);
 }

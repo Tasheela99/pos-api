@@ -9,4 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RequestStockDto {
     private String name;
+    private int qty;
 }

@@ -13,7 +13,10 @@ public class StockDto {
 
     private String name;
 
-    public StockDto(String name) {
+    private int qyt;
+
+    public StockDto(String name, int qty) {
         this.name = name;
+        this.qyt = qty;
     }
 }

@@ -21,6 +21,8 @@ public class Stock {
 
     private String name;
 
+    private int qty;
+
     @OneToMany(mappedBy="stock")
     private Set<Item> items;
 
