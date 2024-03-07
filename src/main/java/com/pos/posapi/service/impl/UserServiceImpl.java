@@ -81,13 +81,13 @@ public class UserServiceImpl implements UserService {
             );
             userRepo.save(userMapper.toUser(userDTO));
         }
-
     }
 
 
     @Override
     public CommonResponseDTO createUser(RequestUserSaveDto userDTO) {
         UserRole userRole = userRoleRepo.findUserRoleByRoleName("CUSTOMER");
+        User userByUsername = userRepo.findByUsername(userDTO.getEmail());
         int otp = generator.generateOtp();
         String prefix = generator.generatePrefix();
         UserDTO newUserDTO = new UserDTO(
@@ -98,17 +98,15 @@ public class UserServiceImpl implements UserService {
                 true,
                 true,
                 true,
-                false,
+                true,
                 passwordEncoder.encode(userDTO.getPassword()),
                 new Date(),
                 userDTO.getEmail(),
                 prefix,
                 otp,
                 userRoleMapper.toUserRoleDto(userRole)
-
         );
         userRepo.save(userMapper.toUser(newUserDTO));
-
         return new CommonResponseDTO(
                 201, "USER_REGISTRATION_SUCCESSFULLY", userDTO.getEmail(), new ArrayList<>()
         );

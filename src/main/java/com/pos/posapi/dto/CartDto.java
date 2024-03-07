@@ -13,8 +13,5 @@ public class CartDto {
     private int cartId;
     private String name;
 
-    public CartDto(String name) {
-        this.name = name;
-    }
 }
 
