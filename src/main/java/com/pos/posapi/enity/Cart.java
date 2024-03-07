@@ -21,9 +21,7 @@ public class Cart {
 
     private String name;
 
-    @OneToMany(mappedBy = "cart",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cart",cascade = CascadeType.MERGE)
     Set<CartItem> cartItems;
-
-
 
 }

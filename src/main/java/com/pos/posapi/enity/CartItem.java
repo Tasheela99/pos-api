@@ -20,14 +20,14 @@ public class CartItem {
 
     @ManyToOne
     @JoinColumn(name = "item_id",referencedColumnName = "item_id")
-    Item item;
+    private Item item;
 
     @ManyToOne
     @JoinColumn(name = "cart_id",referencedColumnName = "cart_id")
-    Cart cart;
+    private Cart cart;
 
-    @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @ManyToOne
+    @JoinColumn(name="user_id", referencedColumnName = "user_id")
     private User user;
 
     private int quantity;

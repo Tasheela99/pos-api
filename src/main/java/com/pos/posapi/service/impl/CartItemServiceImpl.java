@@ -94,13 +94,13 @@ public class CartItemServiceImpl implements CartItemService {
     @Override
     @Transactional
     public CommonResponseDTO addItemToCart(int itemId, int cartId, int quantity, String token) {
-        Optional<Item> item = itemRepo.findById(itemId);
-        if (item.isEmpty()) {
+        Optional<Item> itemOptional = itemRepo.findById(itemId);
+        if (itemOptional.isEmpty()) {
             throw new EntryNotFoundException("No Items Found");
         }
 
-        Optional<Cart> cart = cartRepo.findById(cartId);
-        if (cart.isEmpty()) {
+        Optional<Cart> cartOptional = cartRepo.findById(cartId);
+        if (cartOptional.isEmpty()) {
             throw new EntryNotFoundException("Cart Empty");
         }
 
@@ -109,23 +109,28 @@ public class CartItemServiceImpl implements CartItemService {
         }
 
         ResponseUserDataDTO userData = userService.getAllUserData(token);
-        Optional<User> user = userRepo.findUserById(userData.getUserId());
-        if (user.isEmpty()) {
+        Optional<User> userOptional = userRepo.findUserById(userData.getUserId());
+        if (userOptional.isEmpty()) {
             throw new EntryNotFoundException("User Not Found");
         }
 
+        Item item = itemOptional.get();
+        Cart cart = cartOptional.get();
+        User user = userOptional.get();
+
         // Check if the cart item already exists
-        Optional<CartItem> existingCartItem = cartItemRepo.findByItemIdAndCartId(itemId, cartId);
-        if (existingCartItem.isPresent()) {
+        Optional<CartItem> existingCartItemOptional = cartItemRepo.findByItemIdAndCartId(itemId, cartId);
+        if (existingCartItemOptional.isPresent()) {
             // Update the quantity of the existing cart item
-            existingCartItem.get().setQuantity(existingCartItem.get().getQuantity() + quantity);
-            cartItemRepo.save(existingCartItem.get());
+            CartItem existingCartItem = existingCartItemOptional.get();
+            existingCartItem.setQuantity(existingCartItem.getQuantity() + quantity);
+            cartItemRepo.save(existingCartItem);
         } else {
             // Create a new cart item with the given quantity
             CartItemDto cartItemDto = new CartItemDto(
-                    itemMapper.toItemDto(item.get()),
-                    cartMapper.toCartDto(cart.get()),
-                    userMapper.toUserDto(user.get()),
+                    itemMapper.toItemDto(item),
+                    cartMapper.toCartDto(cart),
+                    userMapper.toUserDto(user),
                     quantity
             );
             cartItemRepo.save(cartItemMapper.toCartItem(cartItemDto));
@@ -141,17 +146,7 @@ public class CartItemServiceImpl implements CartItemService {
 
     @Override
     public CommonResponseDTO deleteCartItem(int id) {
-        Optional<CartItem> cartItem = cartItemRepo.findById(id);
-        if (cartItem.isEmpty()) {
-            throw new EntryNotFoundException("No Cart Item Found");
-        }
-        cartItemRepo.delete(cartItem.get());
-        return new CommonResponseDTO(
-                204,
-                "CART ITEM DELETED SUCCESSFULLY",
-                cartItem.get().getCartItemId(),
-                new ArrayList<>()
-        );
+        return null;
     }
 
     @Override

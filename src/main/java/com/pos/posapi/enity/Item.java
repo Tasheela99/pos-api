@@ -40,7 +40,7 @@ public class Item {
     @JoinColumn(name="category_id", nullable=false)
     private Category category;
 
-    @OneToMany(mappedBy = "item",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "item",cascade = CascadeType.MERGE)
     Set<CartItem> cartItems;
 
     @ManyToOne

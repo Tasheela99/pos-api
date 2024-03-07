@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -66,8 +67,8 @@ public class User {
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")
     private UserRole userRole;
 
-    @OneToOne(mappedBy = "user",cascade = CascadeType.MERGE)
-    private CartItem cartItem;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE)
+    private Set<CartItem> cartItem;
 
 
 }
