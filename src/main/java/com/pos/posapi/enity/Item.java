@@ -30,6 +30,9 @@ public class Item {
     @Column(name = "item_unit_price")
     private double itemUnitPrice;
 
+    @Column(name = "item_description")
+    private String description;
+
     @Column(name = "state",columnDefinition = "TINYINT")
     private boolean activeState;
 

@@ -3,6 +3,7 @@ package com.pos.posapi.service.impl;
 import com.pos.posapi.dto.StockDto;
 import com.pos.posapi.dto.requestdto.RequestStockDto;
 import com.pos.posapi.dto.responsedto.core.CommonResponseDTO;
+import com.pos.posapi.enity.Item;
 import com.pos.posapi.enity.Stock;
 import com.pos.posapi.exception.EntryNotFoundException;
 import com.pos.posapi.repo.StockRepo;
@@ -11,6 +12,7 @@ import com.pos.posapi.util.mapper.StockMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class StockServiceImpl implements StockService {
@@ -55,5 +57,14 @@ public class StockServiceImpl implements StockService {
                 "Stock Deleted",
                 "",
                 new ArrayList<>());
+    }
+
+    @Override
+    public List<StockDto> getStocks() {
+        List<Stock> stocks = stockRepo.findAll();
+        if (stocks.isEmpty()) {
+            throw new EntryNotFoundException("No Stocks Found");
+        }
+        return stockMapper.toStockDtoList(stocks);
     }
 }

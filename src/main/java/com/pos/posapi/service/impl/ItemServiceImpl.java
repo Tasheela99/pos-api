@@ -56,6 +56,7 @@ public class ItemServiceImpl implements ItemService {
                 itemDto.getItemName(),
                 itemDto.getItemQuantity(),
                 itemDto.getItemUnitPrice(),
+                itemDto.getItemDescription(),
                 itemDto.isActiveState(),
                 categoryMapper.toCategoryDto(category.get()),
                 stockMapper.toStockDto(stock.get())

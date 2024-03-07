@@ -3,10 +3,7 @@ package com.pos.posapi.service.impl;
 import com.pos.posapi.dto.CartItemDto;
 import com.pos.posapi.dto.responsedto.ResponseUserDataDTO;
 import com.pos.posapi.dto.responsedto.core.CommonResponseDTO;
-import com.pos.posapi.enity.Cart;
-import com.pos.posapi.enity.CartItem;
-import com.pos.posapi.enity.Item;
-import com.pos.posapi.enity.User;
+import com.pos.posapi.enity.*;
 import com.pos.posapi.exception.EntryNotFoundException;
 import com.pos.posapi.repo.CartItemRepo;
 import com.pos.posapi.repo.CartRepo;
@@ -161,5 +158,14 @@ public class CartItemServiceImpl implements CartItemService {
     public CartItemDto getCartItemById(int id) {
         CartItem cartItem = cartItemRepo.findCartItemById(id);
         return cartItemMapper.toCartItemDto(cartItem);
+    }
+
+    @Override
+    public List<CartItemDto> getCartItems() {
+        List<CartItem> cartItems = cartItemRepo.findAll();
+        if (cartItems.isEmpty()) {
+            throw new EntryNotFoundException("No Cart Items Found");
+        }
+        return cartItemMapper.toCartItemDtoList(cartItems);
     }
 }

@@ -10,4 +10,6 @@ public interface CartItemService {
 
     CommonResponseDTO deleteCartItem(int id);
     CartItemDto getCartItemById(int id);
+
+    List<CartItemDto> getCartItems();
 }

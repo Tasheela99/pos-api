@@ -1,6 +1,7 @@
 package com.pos.posapi.controller;
 
 import com.pos.posapi.dto.CartItemDto;
+import com.pos.posapi.dto.ItemDto;
 import com.pos.posapi.dto.responsedto.core.CommonResponseDTO;
 import com.pos.posapi.service.CartItemService;
 import com.pos.posapi.util.StandardResponse;
@@ -60,6 +61,18 @@ public class CartItemController {
                         200,
                         "ALl Items of Id " + id,
                         cartItemDto
+                ), HttpStatus.OK
+        );
+    }
+
+    @GetMapping(path = "/get-all")
+    public ResponseEntity<StandardResponse> get(){
+        List<CartItemDto> carttItemDtoList = cartItemService.getCartItems();
+        return new ResponseEntity<>(
+                new StandardResponse(
+                        200,
+                        "All Cart Items",
+                        carttItemDtoList
                 ), HttpStatus.OK
         );
     }

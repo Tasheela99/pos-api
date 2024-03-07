@@ -10,10 +10,8 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class RequestItemSaveDto {
     private String itemName;
-    private String itemDescription;
     private int itemQuantity;
     private double itemUnitPrice;
-    private Date itemManufacturedDate;
-    private Date itemExpiredDate;
+    private String itemDescription;
     private boolean activeState;
 }

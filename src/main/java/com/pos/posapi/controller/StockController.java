@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/stock")
 public class StockController {
@@ -55,6 +57,18 @@ public class StockController {
                         commonResponseDto.getMessage(),
                         commonResponseDto.getData()
                 ),HttpStatus.NO_CONTENT
+        );
+    }
+
+    @GetMapping(path = "/get-all")
+    public ResponseEntity<StandardResponse> get(){
+        List<StockDto> stockDtoList = stockService.getStocks();
+        return new ResponseEntity<>(
+                new StandardResponse(
+                        200,
+                        "All Stocks",
+                        stockDtoList
+                ), HttpStatus.OK
         );
     }
 }

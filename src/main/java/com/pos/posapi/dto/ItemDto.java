@@ -14,16 +14,18 @@ public class ItemDto {
     private String itemName;
     private int itemQuantity;
     private double itemUnitPrice;
+    private String description;
     private boolean activeState;
 
     private CategoryDto category;
     private StockDto stock;
     private CartDto cart;
 
-    public ItemDto(String itemName, int itemQuantity, double itemUnitPrice,boolean activeState, CategoryDto category, StockDto stock) {
+    public ItemDto(String itemName, int itemQuantity, double itemUnitPrice, String description, boolean activeState, CategoryDto category, StockDto stock) {
         this.itemName = itemName;
         this.itemQuantity = itemQuantity;
         this.itemUnitPrice = itemUnitPrice;
+        this.description = description;
         this.activeState = activeState;
         this.category = category;
         this.stock = stock;
