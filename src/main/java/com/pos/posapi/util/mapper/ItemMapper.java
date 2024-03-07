@@ -2,6 +2,7 @@ package com.pos.posapi.util.mapper;
 
 
 import com.pos.posapi.dto.ItemDto;
+import com.pos.posapi.dto.responsedto.ResponseItemDto;
 import com.pos.posapi.enity.Item;
 import org.mapstruct.Mapper;
 
@@ -14,4 +15,6 @@ public interface ItemMapper {
     List<ItemDto> toItemDtoList(List<Item> items);
 
     ItemDto toItemDto(Item item);
+
+    List<ResponseItemDto> toResponseItemDtoList(List<Item> item);
 }

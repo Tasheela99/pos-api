@@ -2,6 +2,7 @@ package com.pos.posapi.controller;
 
 import com.pos.posapi.dto.CartItemDto;
 import com.pos.posapi.dto.ItemDto;
+import com.pos.posapi.dto.responsedto.ResponseCartItemDto;
 import com.pos.posapi.dto.responsedto.core.CommonResponseDTO;
 import com.pos.posapi.service.CartItemService;
 import com.pos.posapi.util.StandardResponse;
@@ -67,12 +68,24 @@ public class CartItemController {
 
     @GetMapping(path = "/get-all")
     public ResponseEntity<StandardResponse> get(){
-        List<CartItemDto> carttItemDtoList = cartItemService.getCartItems();
+        List<CartItemDto> cartItemDtoList = cartItemService.getCartItems();
         return new ResponseEntity<>(
                 new StandardResponse(
                         200,
                         "All Cart Items",
-                        carttItemDtoList
+                        cartItemDtoList
+                ), HttpStatus.OK
+        );
+    }
+
+    @GetMapping(path = {"all-cart-items"})
+    public ResponseEntity<StandardResponse> getAllCartItems(){
+        List<ResponseCartItemDto> cartItemDtoList = cartItemService.getAllCartItems();
+        return new ResponseEntity<>(
+                new StandardResponse(
+                        200,
+                        "All Cart Items",
+                        cartItemDtoList
                 ), HttpStatus.OK
         );
     }

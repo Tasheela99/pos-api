@@ -30,4 +30,11 @@ public class ItemDto {
         this.category = category;
         this.stock = stock;
     }
+
+    public ItemDto(int itemId, String itemName, int itemQuantity, double itemUnitPrice) {
+        this.itemId = itemId;
+        this.itemName = itemName;
+        this.itemQuantity = itemQuantity;
+        this.itemUnitPrice = itemUnitPrice;
+    }
 }
