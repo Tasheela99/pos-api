@@ -15,9 +15,8 @@ import java.util.Set;
 @NoArgsConstructor
 public class Cart {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cart_id")
-    private int cartId;
+    private String cartId;
 
     @Column(name = "name")
     private String name;

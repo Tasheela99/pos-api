@@ -18,8 +18,7 @@ public class UserRole {
 
     @Id
     @Column( name = "role_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int roleId;
+    private String roleId;
 
     @Column(length = 45, name = "role_name", unique = true)
     private String roleName;
@@ -34,7 +33,7 @@ public class UserRole {
     @OneToMany(mappedBy="userRole")
     private Set<User> user;
 
-    public UserRole(int roleId, String roleName, String description, boolean activeState) {
+    public UserRole(String roleId, String roleName, String description, boolean activeState) {
         this.roleId = roleId;
         this.roleName = roleName;
         this.description = description;

@@ -10,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class ResponseCartItemDto {
-    private int cartItemId;
+    private String cartItemId;
     private int total;
     List<ResponseItemDto> itemDtos;
 }

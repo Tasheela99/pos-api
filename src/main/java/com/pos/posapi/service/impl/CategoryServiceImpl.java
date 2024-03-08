@@ -28,7 +28,16 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CommonResponseDTO createCategory(RequestCategorySaveDto categoryDto) {
+        String lastId = categoryRepo.findLastId("POS-CAT-", 9);
+
+        String id = "POS-CAT-1";
+
+        if (null != lastId) {
+            int i = (Integer.parseInt(lastId.split("POS-CAT-")[1])) + 1;
+            id = "POS-CAT-" + i;
+        }
         CategoryDto categoryDto1 = new CategoryDto(
+                id,
                 categoryDto.getCategory(),
                 categoryDto.getDescription(),
                 categoryDto.isActiveState()
@@ -47,7 +56,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CommonResponseDTO updateCategory(int id, RequestCategorySaveDto categoryDto) {
+    public CommonResponseDTO updateCategory(String id, RequestCategorySaveDto categoryDto) {
         Optional<Category> Category = categoryRepo.findById(id);
         if (Category.isEmpty()){
             throw new EntryNotFoundException("Category Not Exists");
@@ -68,7 +77,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CommonResponseDTO deleteCategory(int id) {
+    public CommonResponseDTO deleteCategory(String id) {
         Optional<Category> category = categoryRepo.findById(id);
         if (category.isEmpty()){
             throw new EntryNotFoundException("Category Not Found");
@@ -92,7 +101,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto getCategoryById(int id) {
+    public CategoryDto getCategoryById(String id) {
         Category category = categoryRepo.getById(id);
         return categoryMapper.toCategoryDto(category);
     }

@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 public class UserRoleDTO {
 
-    private int roleId;
+    private String roleId;
 
     private String roleName;
 

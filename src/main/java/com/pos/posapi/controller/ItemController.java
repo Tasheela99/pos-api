@@ -23,8 +23,8 @@ public class ItemController {
 
     @PostMapping()
     public ResponseEntity<StandardResponse> create(
-            @RequestParam(value = "categoryId") int categoryId,
-            @RequestParam(value = "stockId") int stockId,
+            @RequestParam(value = "categoryId") String categoryId,
+            @RequestParam(value = "stockId") String stockId,
             @RequestBody RequestItemSaveDto itemDto){
         CommonResponseDTO responseDto = itemService.createItem(categoryId,stockId,itemDto);
         return new ResponseEntity<>(
@@ -37,7 +37,7 @@ public class ItemController {
     }
     @PutMapping(params = {"id"})
     public ResponseEntity<StandardResponse> update(
-            @RequestParam (value = "id") int id,
+            @RequestParam (value = "id") String id,
             @RequestBody RequestItemSaveDto itemDto){
         CommonResponseDTO responseDto = itemService.updateItem(id,itemDto);
         return new ResponseEntity<>(
@@ -51,7 +51,7 @@ public class ItemController {
 
     @DeleteMapping(params = {"id"})
     public ResponseEntity<StandardResponse> delete(
-            @RequestParam (value = "id") int id){
+            @RequestParam (value = "id") String id){
         CommonResponseDTO responseDto = itemService.deleteItem(id);
         return new ResponseEntity<>(
                 new StandardResponse(
@@ -76,7 +76,7 @@ public class ItemController {
 
     @GetMapping(path = "/by-id",params = {"id"})
     public ResponseEntity<StandardResponse> getItemById(
-            @RequestParam(value = "id") int id
+            @RequestParam(value = "id") String id
     ) {
         ItemDto itemDto = itemService.getItemById(id);
         return new ResponseEntity<>(

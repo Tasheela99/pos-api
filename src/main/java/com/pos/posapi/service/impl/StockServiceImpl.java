@@ -26,28 +26,37 @@ public class StockServiceImpl implements StockService {
 
     @Override
     public CommonResponseDTO createStock(RequestStockDto stockDto) {
+        String lastId = stockRepo.findLastId("POS-STK-", 9);
+
+        String id = "POS-STK-1";
+
+        if (null != lastId) {
+            int i = (Integer.parseInt(lastId.split("POS-STK-")[1])) + 1;
+            id = "POS-STK-" + i;
+        }
         StockDto stockDto1 = new StockDto(
+                id,
                 stockDto.getName(),
                 stockDto.getQuantity()
         );
-        if (!stockRepo.existsById(stockDto1.getStockId())) {
+        if (!stockRepo.existsById(stockDto1.getStock_id())) {
             stockRepo.save(stockMapper.toStock(stockDto1));
         }
         return new CommonResponseDTO(
                 201,
                 "STOCK CREATED SUCCESSFULLY",
-                stockDto1.getStockId(),
+                stockDto1.getStock_id(),
                 new ArrayList<>());
     }
 
     @Override
-    public StockDto getStockById(int id) {
+    public StockDto getStockById(String id) {
         Stock stock = stockRepo.getById(id);
         return stockMapper.toStockDto(stock);
     }
 
     @Override
-    public CommonResponseDTO deleteStock(int id) {
+    public CommonResponseDTO deleteStock(String id) {
         if (!stockRepo.existsById(id)) {
             throw new EntryNotFoundException("Stock Not Found");
         }

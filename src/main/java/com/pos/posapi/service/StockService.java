@@ -9,9 +9,9 @@ import java.util.List;
 public interface StockService {
     CommonResponseDTO createStock(RequestStockDto stockDto);
 
-    StockDto getStockById(int id);
+    StockDto getStockById(String id);
 
-    CommonResponseDTO deleteStock(int id);
+    CommonResponseDTO deleteStock(String id);
 
     List<StockDto> getStocks();
 }

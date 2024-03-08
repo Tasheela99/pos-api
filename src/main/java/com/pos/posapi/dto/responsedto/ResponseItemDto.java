@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class ResponseItemDto {
-    private int itemId;
+    private String itemId;
     private String itemName;
     private int itemQuantity;
     private double itemUnitPrice;

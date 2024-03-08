@@ -10,10 +10,13 @@ import java.util.Optional;
 
 @Repository
 @EnableJpaRepositories
-public interface CartItemRepo extends JpaRepository<CartItem, Integer> {
+public interface CartItemRepo extends JpaRepository<CartItem, String> {
     @Query(value = "SELECT * FROM cart_item WHERE item_id=?1 AND cart_id=?1", nativeQuery = true)
-    Optional<CartItem> findByItemIdAndCartId(int itemId, int cartId);
+    Optional<CartItem> findByItemIdAndCartId(String itemId, String cartId);
 
     @Query(value = "SELECT * FROM cart_item WHERE cart_item_id=?1",nativeQuery = true)
-    CartItem findCartItemById(int id);
+    CartItem findCartItemById(String id);
+
+    @Query(value = "SELECT cart_item_id FROM cart_item WHERE cart_item_id like ?% ORDER BY CAST(SUBSTRING(cart_item_id,?) AS UNSIGNED) DESC LIMIT 1", nativeQuery = true)
+    String findLastId(String s, int i);
 }

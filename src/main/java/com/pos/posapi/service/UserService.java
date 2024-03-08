@@ -19,5 +19,5 @@ public interface UserService {
 
     List<ResponseUserDataDTO> getAll();
 
-    CommonResponseDTO deleteUser(int id);
+    CommonResponseDTO deleteUser(String id);
 }

@@ -38,19 +38,19 @@ public class UserRoleServiceImpl implements UserRoleService {
         if (all.isEmpty()) {
 
             UserRole adminUserRole = new UserRole(
-                    1,
+                    "1",
                     "ADMIN",
                     "Admin User",
                     true
             );
             UserRole managerRole = new UserRole(
-                    2,
+                    "2",
                     "MANAGER",
                     "Manager User",
                     true
             );
             UserRole customerUserRole = new UserRole(
-                    3,
+                    "3",
                     "CUSTOMER",
                     "Customer User",
                     true

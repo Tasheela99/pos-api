@@ -50,53 +50,9 @@ public class CartItemServiceImpl implements CartItemService {
         this.cartMapper = cartMapper;
     }
 
-//    @Override
-//    @Transactional
-//    public CommonResponseDTO addItemToCart(int itemId, int cartId, int quantity, String token) {
-//        Optional<Item> item = itemRepo.findById(itemId);
-//        if (item.isEmpty()) {
-//            throw new EntryNotFoundException("No Items Found");
-//        }
-//        Optional<Cart> cart = cartRepo.findById(cartId);
-//        if (cart.isEmpty()) {
-//            throw new EntryNotFoundException("Cart Empty");
-//        }
-//        if (token != null && token.startsWith("Bearer ")) {
-//            token = token.substring(7);
-//        }
-//
-//        ResponseUserDataDTO userData = userService.getAllUserData(token);
-//        Optional<User> user = userRepo.findById(userData.getUserId());
-//        if (user.isEmpty()) {
-//            throw new EntryNotFoundException("User Not Found");
-//        }
-//        CartItemDto cartItemDto = new CartItemDto(
-//                itemMapper.toItemDto(item.get()),
-//                cartMapper.toCartDto(cart.get()),
-//                userMapper.toUserDto(user.get()),
-//                quantity
-//        );
-//        if (!cartItemRepo.existsById(cartItemDto.getCartItemId())) {
-//            cartItemRepo.save(cartItemMapper.toCartItem(cartItemDto));
-//        }
-//
-//        Optional<CartItem> cartItem = cartItemRepo.findById(cartItemDto.getCartItemId());
-//        if (cartItem.isPresent()) {
-//            cartItem.get().setQuantity(cartItem.get().getQuantity() + quantity);
-//            cartItemRepo.save(cartItem.get());
-//        }
-//        return new CommonResponseDTO(
-//                201,
-//                "ITEM ADDED TO CART SUCCESSFULLY",
-//                cartItemDto.getCartItemId(),
-//                new ArrayList<>()
-//        );
-//
-//    }
-
     @Override
     @Transactional
-    public CommonResponseDTO addItemToCart(int itemId, int cartId, int quantity, String token) {
+    public CommonResponseDTO addItemToCart(String itemId, String cartId, int quantity, String token) {
         Optional<Item> itemOptional = itemRepo.findById(itemId);
         if (itemOptional.isEmpty()) {
             throw new EntryNotFoundException("No Items Found");
@@ -111,6 +67,15 @@ public class CartItemServiceImpl implements CartItemService {
             token = token.substring(7);
         }
 
+        String lastId = cartItemRepo.findLastId("POS-CA-", 8);
+
+        String id = "POS-CA-1";
+
+        if (null != lastId) {
+            int i = (Integer.parseInt(lastId.split("POS-CA-")[1])) + 1;
+            id = "POS-CA-" + i;
+        }
+
         ResponseUserDataDTO userData = userService.getAllUserData(token);
         Optional<User> userOptional = userRepo.findUserById(userData.getUserId());
         if (userOptional.isEmpty()) {
@@ -121,39 +86,42 @@ public class CartItemServiceImpl implements CartItemService {
         Cart cart = cartOptional.get();
         User user = userOptional.get();
 
-        // Check if the cart item already exists
         Optional<CartItem> existingCartItemOptional = cartItemRepo.findByItemIdAndCartId(itemId, cartId);
         if (existingCartItemOptional.isPresent()) {
-            // Update the quantity of the existing cart item
             CartItem existingCartItem = existingCartItemOptional.get();
             existingCartItem.setQuantity(existingCartItem.getQuantity() + quantity);
             cartItemRepo.save(existingCartItem);
         } else {
-            // Create a new cart item with the given quantity
             CartItemDto cartItemDto = new CartItemDto(
+                    id,
                     itemMapper.toItemDto(item),
                     cartMapper.toCartDto(cart),
                     userMapper.toUserDto(user),
                     quantity
             );
             cartItemRepo.save(cartItemMapper.toCartItem(cartItemDto));
+            return new CommonResponseDTO(
+                    201,
+                    "ITEM ADDED TO CART SUCCESSFULLY",
+                    cartItemDto.getCartItemId(),
+                    new ArrayList<>()
+            );
         }
-
         return new CommonResponseDTO(
                 201,
                 "ITEM ADDED TO CART SUCCESSFULLY",
-                null, // Provide the appropriate data if needed
+                existingCartItemOptional.get().getCartItemId(),
                 new ArrayList<>()
         );
     }
 
     @Override
-    public CommonResponseDTO deleteCartItem(int id) {
+    public CommonResponseDTO deleteCartItem(String id) {
         return null;
     }
 
     @Override
-    public CartItemDto getCartItemById(int id) {
+    public CartItemDto getCartItemById(String id) {
         CartItem cartItem = cartItemRepo.findCartItemById(id);
         return cartItemMapper.toCartItemDto(cartItem);
     }

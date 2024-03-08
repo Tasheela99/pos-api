@@ -24,8 +24,8 @@ public class CartItemController {
 
     @PostMapping(params = {"itemId", "cartId", "quantity"})
     public ResponseEntity<StandardResponse> addItemToCart(
-            @RequestParam(value = "itemId") int itemId,
-            @RequestParam(value = "cartId") int cartId,
+            @RequestParam(value = "itemId") String itemId,
+            @RequestParam(value = "cartId") String cartId,
             @RequestParam(value = "quantity") int quantity,
             @RequestHeader("Authorization") String token
     ) {
@@ -41,7 +41,7 @@ public class CartItemController {
 
     @DeleteMapping(params = {"id"})
     public ResponseEntity<StandardResponse> deleteCartItem(
-            @RequestParam(value = "id") int id
+            @RequestParam(value = "id") String id
     ) {
         CommonResponseDTO commonResponseDTO = cartItemService.deleteCartItem(id);
         return new ResponseEntity<>(
@@ -55,7 +55,7 @@ public class CartItemController {
 
     @GetMapping(params = {"id"})
     public ResponseEntity<StandardResponse> getCartItemById(
-            @RequestParam(value = "id") int id
+            @RequestParam(value = "id") String id
     ) {
         CartItemDto cartItemDto = cartItemService.getCartItemById(id);
         return new ResponseEntity<>(

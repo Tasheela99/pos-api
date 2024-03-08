@@ -10,7 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class ItemDto {
-    private int itemId;
+    private String itemId;
     private String itemName;
     private int itemQuantity;
     private double itemUnitPrice;
@@ -31,10 +31,21 @@ public class ItemDto {
         this.stock = stock;
     }
 
-    public ItemDto(int itemId, String itemName, int itemQuantity, double itemUnitPrice) {
+    public ItemDto(String itemId, String itemName, int itemQuantity, double itemUnitPrice) {
         this.itemId = itemId;
         this.itemName = itemName;
         this.itemQuantity = itemQuantity;
         this.itemUnitPrice = itemUnitPrice;
+    }
+
+    public ItemDto(String itemId, String itemName, int itemQuantity, double itemUnitPrice, String description, boolean activeState, CategoryDto category, StockDto stock) {
+        this.itemId = itemId;
+        this.itemName = itemName;
+        this.itemQuantity = itemQuantity;
+        this.itemUnitPrice = itemUnitPrice;
+        this.description = description;
+        this.activeState = activeState;
+        this.category = category;
+        this.stock = stock;
     }
 }

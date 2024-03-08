@@ -35,7 +35,7 @@ public class CategoryController {
     }
     @PutMapping(params = {"id"})
     public ResponseEntity<StandardResponse> update(
-            @RequestParam (value = "id") int id,
+            @RequestParam (value = "id") String id,
             @RequestBody RequestCategorySaveDto categoryDto){
         CommonResponseDTO responseDto = categoryService.updateCategory(id,categoryDto);
         return new ResponseEntity<>(
@@ -49,7 +49,7 @@ public class CategoryController {
 
     @DeleteMapping(params = {"id"})
     public ResponseEntity<StandardResponse> delete(
-            @RequestParam (value = "id") int id){
+            @RequestParam (value = "id") String id){
         CommonResponseDTO responseDto = categoryService.deleteCategory(id);
         return new ResponseEntity<>(
                 new StandardResponse(
@@ -73,7 +73,7 @@ public class CategoryController {
     }
     @GetMapping(path = "/by-id",params = {"id"})
     public ResponseEntity<StandardResponse> getCategoryById(
-            @RequestParam(value = "id") int id
+            @RequestParam(value = "id") String id
     ) {
         CategoryDto categoryDto = categoryService.getCategoryById(id);
         return new ResponseEntity<>(

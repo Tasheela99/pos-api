@@ -11,7 +11,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class UserDTO implements SuperDTO {
 
-    private int userId;
+    private String userId;
 
     private boolean activeState;
 

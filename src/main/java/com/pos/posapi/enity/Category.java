@@ -20,8 +20,7 @@ public class Category {
 
     @Id
     @Column(name = "category_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int categoryId;
+    private String categoryId;
 
     @Column(name = "category")
     @Enumerated(EnumType.STRING)

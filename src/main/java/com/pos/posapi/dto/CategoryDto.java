@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class CategoryDto {
-    private int categoryId;
+    private String categoryId;
     private CategoryType category;
     private String description;
     private boolean activeState;

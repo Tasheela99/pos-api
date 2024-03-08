@@ -37,7 +37,7 @@ public class StockController {
     }
     @GetMapping(path = "/by-id",params = {"id"})
     public ResponseEntity<StandardResponse> getStockById(
-            @RequestParam(value = "id") int id
+            @RequestParam(value = "id") String id
     ) {
         StockDto stockDto = stockService.getStockById(id);
         return new ResponseEntity<>(
@@ -51,7 +51,7 @@ public class StockController {
 
     @DeleteMapping(params={"id"})
     public ResponseEntity<StandardResponse> deleteStock(
-        @RequestParam(value="id") int id
+        @RequestParam(value="id") String id
     ){
         CommonResponseDTO commonResponseDto = stockService.deleteStock(id);
         return new ResponseEntity<>(

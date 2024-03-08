@@ -8,13 +8,13 @@ import com.pos.posapi.dto.responsedto.core.CommonResponseDTO;
 import java.util.List;
 
 public interface ItemService {
-    CommonResponseDTO createItem(int categoryId,int stockId, RequestItemSaveDto itemDto);
+    CommonResponseDTO createItem(String categoryId,String stockId, RequestItemSaveDto itemDto);
 
-    CommonResponseDTO updateItem(int id, RequestItemSaveDto itemDto);
+    CommonResponseDTO updateItem(String id, RequestItemSaveDto itemDto);
 
-    CommonResponseDTO deleteItem(int id);
+    CommonResponseDTO deleteItem(String id);
 
     List<ItemDto> getItems();
 
-    ItemDto getItemById(int id);
+    ItemDto getItemById(String id);
 }

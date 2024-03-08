@@ -41,7 +41,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public CommonResponseDTO createItem(int categoryId,int stockId, RequestItemSaveDto itemDto) {
+    public CommonResponseDTO createItem(String categoryId,String stockId, RequestItemSaveDto itemDto) {
         Optional<Category> category = categoryRepo.findById(categoryId);
         if (category.isEmpty()) {
             throw new EntryNotFoundException("Category Not Found");
@@ -50,8 +50,17 @@ public class ItemServiceImpl implements ItemService {
         if (stock.isEmpty()) {
             throw new EntryNotFoundException("Stock Not Found");
         }
+        String lastId = itemRepo.findLastId("POS-I-", 7);
+
+        String id = "POS-I-1";
+
+        if (null != lastId) {
+            int i = (Integer.parseInt(lastId.split("POS-I-")[1])) + 1;
+            id = "POS-I-" + i;
+        }
 
         ItemDto itemDto1 = new ItemDto(
+                id,
                 itemDto.getItemName(),
                 itemDto.getItemQuantity(),
                 itemDto.getItemUnitPrice(),
@@ -75,7 +84,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public CommonResponseDTO updateItem(int id, RequestItemSaveDto itemDto) {
+    public CommonResponseDTO updateItem(String id, RequestItemSaveDto itemDto) {
         Optional<Item> item = itemRepo.findById(id);
         if (item.isEmpty()){
             throw new EntryNotFoundException("Customer Not Exists");
@@ -97,7 +106,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public CommonResponseDTO deleteItem(int id) {
+    public CommonResponseDTO deleteItem(String id) {
         if (!itemRepo.existsById(id)){
             throw new EntryNotFoundException("Item Not Found");
         }
@@ -120,7 +129,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemDto getItemById(int id) {
+    public ItemDto getItemById(String id) {
         Item item = itemRepo.getById(id);
         return itemMapper.toItemDto(item);
     }

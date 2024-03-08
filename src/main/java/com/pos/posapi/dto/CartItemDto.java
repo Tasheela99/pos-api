@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class CartItemDto {
-    private int cartItemId;
+    private String cartItemId;
     private ItemDto item;
     private CartDto cart;
     private UserDTO user;

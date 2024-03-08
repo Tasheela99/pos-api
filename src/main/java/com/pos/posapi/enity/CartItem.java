@@ -14,9 +14,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class CartItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cart_item_id")
-    private int cartItemId;
+    private String cartItemId;
 
     @ManyToOne
     @JoinColumn(name = "item_id",referencedColumnName = "item_id")

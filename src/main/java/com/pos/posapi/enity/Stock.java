@@ -15,9 +15,8 @@ import java.util.Set;
 @NoArgsConstructor
 public class Stock {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "stock_id")
-    private int stockId;
+    private String stock_id;
 
     @Column(name = "name")
     private String name;

@@ -59,6 +59,14 @@ public class UserServiceImpl implements UserService {
     public void initializeUser() throws IOException {
         String email = "tasheelaa.info@gmail.com";
         User user = userRepo.findByUsername(email);
+        String lastId = userRepo.findLastId("POS-U-", 7);
+
+        String id = "POS-U-1";
+
+        if (null != lastId) {
+            int i = (Integer.parseInt(lastId.split("POS-U-")[1])) + 1;
+            id = "POS-U-" + i;
+        }
         if (user == null) {
             String password = "12345";
 
@@ -67,6 +75,7 @@ public class UserServiceImpl implements UserService {
             int otp = generator.generateOtp();
             String prefix = generator.generatePrefix();
             UserDTO userDTO = new UserDTO(
+                    id,
                     true,
                     email,
                     "Tasheela",
@@ -93,7 +102,16 @@ public class UserServiceImpl implements UserService {
         User userByUsername = userRepo.findByUsername(userDTO.getEmail());
         int otp = generator.generateOtp();
         String prefix = generator.generatePrefix();
+        String lastId = userRepo.findLastId("POS-U-", 7);
+
+        String id = "POS-U-1";
+
+        if (null != lastId) {
+            int i = (Integer.parseInt(lastId.split("POS-U-")[1])) + 1;
+            id = "POS-U-" + i;
+        }
         UserDTO newUserDTO = new UserDTO(
+                id,
                 true,
                 userDTO.getEmail(),
                 userDTO.getFirstName(),
@@ -123,7 +141,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public CommonResponseDTO deleteUser(int id) {
+    public CommonResponseDTO deleteUser(String id) {
         Optional<User> user = userRepo.findUserById(id);
         if (user.isEmpty()){
             throw new EntryNotFoundException("User Not Found");

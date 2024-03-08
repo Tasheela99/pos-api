@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class StockDto {
-    private int stockId;
+    private String stock_id;
 
     private String name;
 

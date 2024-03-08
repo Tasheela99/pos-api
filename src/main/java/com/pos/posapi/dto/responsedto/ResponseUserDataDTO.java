@@ -9,11 +9,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class ResponseUserDataDTO {
-    private int userId;
+    private String userId;
     private String email;
     private String firstName;
     private String lastName;
-    private int roleId;
+    private String roleId;
     private String roleName;
     private String prefix;
 

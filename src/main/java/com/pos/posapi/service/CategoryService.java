@@ -10,11 +10,11 @@ import java.util.List;
 public interface CategoryService {
     CommonResponseDTO createCategory(RequestCategorySaveDto categoryDto);
 
-    CommonResponseDTO updateCategory(int id, RequestCategorySaveDto categoryDto);
+    CommonResponseDTO updateCategory(String id, RequestCategorySaveDto categoryDto);
 
-    CommonResponseDTO deleteCategory(int id);
+    CommonResponseDTO deleteCategory(String id);
 
     List<CategoryDto> getCategories();
 
-    CategoryDto getCategoryById(int id);
+    CategoryDto getCategoryById(String id);
 }
