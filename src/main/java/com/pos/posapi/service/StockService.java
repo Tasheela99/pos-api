@@ -14,4 +14,6 @@ public interface StockService {
     CommonResponseDTO deleteStock(String id);
 
     List<StockDto> getStocks();
+
+    CommonResponseDTO updateStock(String id,RequestStockDto stockDto);
 }

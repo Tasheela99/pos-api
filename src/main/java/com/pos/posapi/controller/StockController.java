@@ -63,6 +63,21 @@ public class StockController {
         );
     }
 
+    @PutMapping(params={"id"})
+    public ResponseEntity<StandardResponse> updateStock(
+            @RequestParam(value="id") String id,
+            @RequestBody RequestStockDto stockDto
+    ){
+        CommonResponseDTO commonResponseDto = stockService.updateStock(id,stockDto);
+        return new ResponseEntity<>(
+                new StandardResponse(
+                        commonResponseDto.getCode(),
+                        commonResponseDto.getMessage(),
+                        commonResponseDto.getData()
+                ),HttpStatus.OK
+        );
+    }
+
     @GetMapping(path = "/get-all")
     public ResponseEntity<StandardResponse> get(){
         List<StockDto> stockDtoList = stockService.getStocks();

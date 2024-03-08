@@ -25,16 +25,16 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public CommonResponseDTO initializeCart() {
-//        String lastId = cartRepo.findLastId("POS-C-", 7);
-//
-//        String id = "POS-C-1";
-//
-//        if (null != lastId) {
-//            int i = (Integer.parseInt(lastId.split("POS-C-")[1])) + 1;
-//            id = "POS-C-" + i;
-//        }
+        String lastId = cartRepo.findLastId("POS-C-", 7);
+
+        String id = "POS-C-1";
+
+        if (null != lastId) {
+            int i = (Integer.parseInt(lastId.split("POS-C-")[1])) + 1;
+            id = "POS-C-" + i;
+        }
         CartDto cartDto = new CartDto(
-                "1",
+                id,
                 "POS SYSTEM CART"
         );
         if (!cartRepo.existsById(cartDto.getCartId())){
