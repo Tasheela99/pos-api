@@ -9,14 +9,14 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class StockDto {
-    private int stock_id;
+    private int stockId;
 
     private String name;
 
-    private int qyt;
+    private int quantity;
 
-    public StockDto(String name, int qty) {
+    public StockDto(String name, int quantity) {
         this.name = name;
-        this.qyt = qty;
+        this.quantity = quantity;
     }
 }

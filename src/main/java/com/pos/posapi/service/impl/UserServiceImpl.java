@@ -6,6 +6,7 @@ import com.pos.posapi.dto.responsedto.ResponseUserDataDTO;
 import com.pos.posapi.dto.responsedto.core.CommonResponseDTO;
 import com.pos.posapi.enity.User;
 import com.pos.posapi.enity.UserRole;
+import com.pos.posapi.exception.EntryNotFoundException;
 import com.pos.posapi.jwt.JwtConfig;
 import com.pos.posapi.repo.UserRepo;
 import com.pos.posapi.repo.UserRoleRepo;
@@ -27,6 +28,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -118,6 +120,21 @@ public class UserServiceImpl implements UserService {
         List<User> all = userRepo.findAll();
         return userMapper.toResponseUserDataList(all);
 
+    }
+
+    @Override
+    public CommonResponseDTO deleteUser(int id) {
+        Optional<User> user = userRepo.findUserById(id);
+        if (user.isEmpty()){
+            throw new EntryNotFoundException("User Not Found");
+        }
+        userRepo.delete(user.get());
+        return new CommonResponseDTO(
+                204,
+                "USER DELETED SUCCESSFULLY",
+                user.get().getUserId(),
+                new ArrayList<>()
+        );
     }
 
     @Override

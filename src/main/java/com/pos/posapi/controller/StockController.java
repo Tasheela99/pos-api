@@ -28,7 +28,9 @@ public class StockController {
         CommonResponseDTO commonResponseDTO = stockService.createStock(stockDto);
         return new ResponseEntity<>(
                 new StandardResponse(
-                        commonResponseDTO.getCode(), commonResponseDTO.getMessage(), commonResponseDTO.getData()
+                        commonResponseDTO.getCode(),
+                        commonResponseDTO.getMessage(),
+                        commonResponseDTO.getData()
                 ), HttpStatus.CREATED
         );
     }

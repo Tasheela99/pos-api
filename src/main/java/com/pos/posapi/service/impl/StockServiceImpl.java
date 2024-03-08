@@ -28,14 +28,15 @@ public class StockServiceImpl implements StockService {
     public CommonResponseDTO createStock(RequestStockDto stockDto) {
         StockDto stockDto1 = new StockDto(
                 stockDto.getName(),
-                stockDto.getQty());
-        if (!stockRepo.existsById(stockDto1.getStock_id())) {
+                stockDto.getQuantity()
+        );
+        if (!stockRepo.existsById(stockDto1.getStockId())) {
             stockRepo.save(stockMapper.toStock(stockDto1));
         }
         return new CommonResponseDTO(
                 201,
                 "STOCK CREATED SUCCESSFULLY",
-                stockDto1.getStock_id(),
+                stockDto1.getStockId(),
                 new ArrayList<>());
     }
 

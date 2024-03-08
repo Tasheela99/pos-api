@@ -17,11 +17,13 @@ public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "stock_id")
-    private int stock_id;
+    private int stockId;
 
+    @Column(name = "name")
     private String name;
 
-    private int qty;
+    @Column(name = "quantity")
+    private int quantity;
 
     @OneToMany(mappedBy="stock")
     private Set<Item> items;

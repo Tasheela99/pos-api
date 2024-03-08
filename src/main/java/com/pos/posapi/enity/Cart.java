@@ -19,6 +19,7 @@ public class Cart {
     @Column(name = "cart_id")
     private int cartId;
 
+    @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "cart",cascade = CascadeType.MERGE)

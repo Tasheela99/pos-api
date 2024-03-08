@@ -18,4 +18,6 @@ public interface UserService {
     CommonResponseDTO createUser(RequestUserSaveDto userDTO);
 
     List<ResponseUserDataDTO> getAll();
+
+    CommonResponseDTO deleteUser(int id);
 }

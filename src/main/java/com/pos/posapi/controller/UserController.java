@@ -64,4 +64,18 @@ public class UserController {
         );
     }
 
+    @DeleteMapping(params = {"id"})
+    public ResponseEntity<StandardResponse> deleteUser(
+            @RequestParam(value = "id") int id
+    ){
+        CommonResponseDTO responseDto = userService.deleteUser(id);
+        return new ResponseEntity<>(
+                new StandardResponse(
+                        responseDto.getCode(),
+                        responseDto.getMessage(),
+                        responseDto.getData()
+                ),HttpStatus.NO_CONTENT
+        );
+    }
+
 }

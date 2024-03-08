@@ -33,17 +33,17 @@ public class Item {
     @Column(name = "item_description")
     private String description;
 
-    @Column(name = "state",columnDefinition = "TINYINT")
+    @Column(name = "state", columnDefinition = "TINYINT")
     private boolean activeState;
 
     @ManyToOne
-    @JoinColumn(name="category_id", nullable=false)
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
     private Category category;
 
-    @OneToMany(mappedBy = "item",cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
     Set<CartItem> cartItems;
 
     @ManyToOne
-    @JoinColumn(name="stock_id", nullable=false)
+    @JoinColumn(name = "stock_id", nullable = false)
     private Stock stock;
 }

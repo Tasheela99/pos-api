@@ -30,9 +30,9 @@ public class Category {
     @Column(name = "category_description")
     private String description;
 
-    @Column(name = "activeState",columnDefinition = "TINYINT")
+    @Column(name = "activeState", columnDefinition = "TINYINT")
     private boolean activeState;
 
-    @OneToMany(mappedBy="category")
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Item> items;
 }

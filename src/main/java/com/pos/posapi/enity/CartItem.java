@@ -30,5 +30,6 @@ public class CartItem {
     @JoinColumn(name="user_id", referencedColumnName = "user_id")
     private User user;
 
+    @Column(name = "quantity")
     private int quantity;
 }

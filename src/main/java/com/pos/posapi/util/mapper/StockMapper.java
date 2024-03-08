@@ -9,8 +9,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface StockMapper {
     StockDto toStockDto(Stock stock);
-
-    Stock toStock(StockDto stockDto1);
-
     List<StockDto> toStockDtoList(List<Stock> stocks);
+    Stock toStock(StockDto stockDto1);
 }
