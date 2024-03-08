@@ -1,6 +1,5 @@
 package com.pos.posapi.controller;
 
-import com.pos.posapi.dto.CustomerDto;
 import com.pos.posapi.dto.ItemDto;
 import com.pos.posapi.dto.requestdto.RequestItemSaveDto;
 import com.pos.posapi.dto.responsedto.core.CommonResponseDTO;

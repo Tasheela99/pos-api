@@ -5,7 +5,6 @@ import com.pos.posapi.dto.ItemDto;
 import com.pos.posapi.dto.requestdto.RequestItemSaveDto;
 import com.pos.posapi.dto.responsedto.core.CommonResponseDTO;
 import com.pos.posapi.enity.Category;
-import com.pos.posapi.enity.Customer;
 import com.pos.posapi.enity.Item;
 import com.pos.posapi.enity.Stock;
 import com.pos.posapi.exception.EntryDuplicateException;
