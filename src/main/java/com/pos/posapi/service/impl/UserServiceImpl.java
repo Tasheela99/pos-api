@@ -26,6 +26,7 @@ import javax.crypto.SecretKey;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Service
@@ -110,6 +111,13 @@ public class UserServiceImpl implements UserService {
         return new CommonResponseDTO(
                 201, "USER_REGISTRATION_SUCCESSFULLY", userDTO.getEmail(), new ArrayList<>()
         );
+    }
+
+    @Override
+    public List<ResponseUserDataDTO> getAll() {
+        List<User> all = userRepo.findAll();
+        return userMapper.toResponseUserDataList(all);
+
     }
 
     @Override

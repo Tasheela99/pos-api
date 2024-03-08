@@ -170,18 +170,19 @@ public class CartItemServiceImpl implements CartItemService {
     @Override
     public List<ResponseCartItemDto> getAllCartItems() {
         List<CartItem> cartItems = cartItemRepo.findAll();
-        List<Item> item = itemRepo.findAll();
         if (!cartItems.isEmpty()){
             List<ResponseCartItemDto> responseCartItemDtoList = new ArrayList<>();
-            for (CartItem cartItem:cartItems){
+            for (CartItem cartItem : cartItems) {
+                List<Item> item = itemRepo.findAllItemsByCartItemId(cartItem.getCartItemId());
                 ResponseCartItemDto responseCartItemDto = new ResponseCartItemDto(
-                        cartItem.getCart().getCartId(),
+                        cartItem.getCartItemId(),
                         cartItem.getQuantity(),
                         itemMapper.toResponseItemDtoList(item)
                 );
                 responseCartItemDtoList.add(responseCartItemDto);
             }
             return responseCartItemDtoList;
+
         }else {
             throw new EntryNotFoundException("No Items Found");
         }

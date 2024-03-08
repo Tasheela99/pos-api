@@ -5,6 +5,7 @@ import com.pos.posapi.dto.responsedto.ResponseUserDataDTO;
 import com.pos.posapi.dto.responsedto.core.CommonResponseDTO;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface UserService {
 
@@ -16,4 +17,5 @@ public interface UserService {
 
     CommonResponseDTO createUser(RequestUserSaveDto userDTO);
 
+    List<ResponseUserDataDTO> getAll();
 }

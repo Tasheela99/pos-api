@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/v1/user")
@@ -37,10 +38,23 @@ public class UserController {
 
 
     @GetMapping(path = {"/get-all-user-data"}, params = {"token"})
-    public ResponseEntity<StandardResponse> getALlUserData(
+    public ResponseEntity<StandardResponse> getAllUserData(
             @RequestParam(value = "token") String token
     ){
         ResponseUserDataDTO userDataDTO = userService.getAllUserData(token);
+        return new ResponseEntity<>(
+                new StandardResponse(
+                        200,
+                        "ALl User Data ",
+                        userDataDTO
+                ),HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/get-all")
+    public ResponseEntity<StandardResponse> getAll(
+    ){
+        List<ResponseUserDataDTO> userDataDTO = userService.getAll();
         return new ResponseEntity<>(
                 new StandardResponse(
                         200,
